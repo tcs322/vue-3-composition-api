@@ -3,7 +3,7 @@
         <h1>Lista de tarefas</h1>
         <ul>
             <li v-for="tarefa in tarefas" :key="tarefa.id">
-                {{ tarefa.name }}
+                {{ tarefa.title }}
             </li>
         </ul>
         <input type="text" v-model="name">
@@ -11,21 +11,25 @@
 </template>
 
 <script>
-import { ref } from 'vue'
+import { onMounted, ref } from 'vue'
+import TodoService from '@/services/todos.services';
 
 export default {
     name: 'TodoView',
     setup () {
-        const tarefas = [
-            {id: 1, name: 'tarefa 01'},
-            {id: 2, name: 'tarefa 02'}
-        ]
+        const tarefas = ref([])
 
-        const name = ref('Thyerre')
-    
+        onMounted(() => {
+            TodoService.getAll()
+                .then(response => {
+                    console.log(response)
+                    tarefas.value = response.data.data
+                })
+                .catch(error => console.log(error))
+        })
+
         return {
-            tarefas,
-            name
+            tarefas
         }
     }
 }
