@@ -9,7 +9,7 @@
         </div>
         <ul>
             <li v-for="tarefa in tarefas" :key="tarefa.id">
-                {{ tarefa.title }}
+                <list-todo-view :todo="tarefa"></list-todo-view>
             </li>
         </ul>
         <input type="text" v-model="name">
@@ -19,6 +19,7 @@
 <script>
 import { onMounted, ref } from 'vue'
 import TodoService from '@/services/todos.services';
+import ListTodoView from '@/views/Todos/ListTodoView'
 
 export default {
     name: 'TodoView',
@@ -41,6 +42,9 @@ export default {
             loading,
             tarefas
         }
+    },
+    components: {
+        ListTodoView
     }
 }
 
