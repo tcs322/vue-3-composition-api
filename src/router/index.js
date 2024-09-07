@@ -24,6 +24,12 @@ const routes = [
     path: '/todos/create',
     name: 'todos.create',
     component: () => import('../views/Todos/AddTodoView.vue')
+  },
+  {
+    path: '/todos/:id/edit',
+    name: 'todos.edit',
+    component: () => import('../views/Todos/EditTodoView.vue'),
+    props: true
   }
 ]
 
