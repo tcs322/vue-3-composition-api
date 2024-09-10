@@ -9,7 +9,7 @@
         </div>
         <ul>
             <li v-for="tarefa in tarefas" :key="tarefa.id">
-                <list-todo-view :todo="tarefa"></list-todo-view>
+                <list-todo-view :todo="tarefa" @todoDeleted="removeTodoList"></list-todo-view>
             </li>
         </ul>
         <input type="text" v-model="name">
@@ -38,9 +38,14 @@ export default {
                 .finally(() => loading.value = false)
         })
 
+        const removeTodoList = (todo) => {
+            tarefas.value.splice(tarefas.value.indexOf(todo), 1)
+        }
+
         return {
             loading,
-            tarefas
+            tarefas,
+            removeTodoList
         }
     },
     components: {
