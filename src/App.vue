@@ -6,3 +6,7 @@
   </nav>
   <router-view/>
 </template>
+
+<style lang="sass">
+@import "./assets/styles/eti.scss"
+</style>
